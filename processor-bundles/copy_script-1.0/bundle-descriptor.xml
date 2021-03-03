@@ -1,0 +1,29 @@
+<bundleDescriptor>
+  <bundleName>simple_copy</bundleName>
+  <bundleVersion>1.0</bundleVersion>
+  <processorDescriptors>
+    <processorDescriptor>
+      <processorName>Simple copy</processorName>
+      <processorVersion>1.0</processorVersion>
+      <executableName>copy</executableName>
+      <parameterDescriptors>
+        <parameterDescriptor>
+          <name>preserve_date</name>
+          <type>boolean</type>
+          <description>Preserve date</description>
+          <defaultValue>true</defaultValue>
+        </parameterDescriptor>
+        <parameterDescriptor>
+          <name>birthday</name>
+          <type>string</type>
+          <description>Operator's birthday</description>
+          <defaultValue>Happy Birthday</defaultValue>
+        </parameterDescriptor>
+      </parameterDescriptors>
+      <outputFormats>default</outputFormats>
+      <formatting>IMPLICIT</formatting>
+      <inputProductTypes>MERIS_L1B</inputProductTypes>
+      <outputProductType>MERIS_L1B</outputProductType>
+    </processorDescriptor>
+  </processorDescriptors>
+</bundleDescriptor>

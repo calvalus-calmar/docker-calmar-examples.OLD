@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<wps:Execute service="WPS"
+             version="1.0.0"
+             xmlns:wps="http://www.opengis.net/wps/1.0.0"
+             xmlns:ows="http://www.opengis.net/ows/1.1"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+  <ows:Identifier>L2Plus</ows:Identifier>
+  <wps:DataInputs>
+    <wps:Input>
+      <ows:Identifier>productionName</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>Process MERIS MER_RR__1P using BandMaths operator, outputting to Hadoop SequenceFile and netCDF, and also generate a quicklook</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>inputPath</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>/calvalus/eodata/MER_RR__1P/r03/2003/08/13/MER_RR__1PNPDK20030813_175754_000026132019_00027_07596_4557.N1</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>calvalus.output.dir</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>/calvalus/home/examples/example3_prod-l2_png</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>processorName</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>BandMaths</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>calvalus.l2.parameters</ows:Identifier>
+      <wps:Data>
+        <wps:ComplexData>
+          <parameters>
+            <variables>
+              <variable>
+                <name>SOLAR_FLUX_13</name>
+                <type>float32</type>
+                <value>914.18945</value>
+              </variable>
+              <variable>
+                <name>SOLAR_FLUX_14</name>
+                <type>float32</type>
+                <value>882.8275</value>
+              </variable>
+              <variable>
+                <name>PI</name>
+                <type>float64</type>
+                <value>3.1415</value>
+              </variable>
+            </variables>
+            <targetBands>
+              <targetBand>
+                <name>reflec_13</name>
+                <expression>radiance_13 / (PI * SOLAR_FLUX_13)</expression>
+                <description>TOA reflectance in channel 13</description>
+                <type>float32</type>
+                <validExpression>reflec_13 >= 0</validExpression>
+                <noDataValue>-999</noDataValue>
+                <spectralBandIndex>13</spectralBandIndex>
+              </targetBand>
+              <targetBand>
+                <name>reflec_14</name>
+                <expression>radiance_14 / (PI * SOLAR_FLUX_14)</expression>
+                <description>TOA reflectance in channel 14</description>
+                <type>float32</type>
+                <unit>myunits</unit>
+                <validExpression>reflec_14 >= 0</validExpression>
+                <noDataValue>-999</noDataValue>
+                <spectralBandIndex>14</spectralBandIndex>
+              </targetBand>
+            </targetBands>
+          </parameters>
+        </wps:ComplexData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>calvalus.output.format</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>NetCDF4-BEAM</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>quicklooks</ows:Identifier>
+      <wps:Data>
+        <wps:LiteralData>true</wps:LiteralData>
+      </wps:Data>
+    </wps:Input>
+    <wps:Input>
+      <ows:Identifier>calvalus.ql.parameters</ows:Identifier>
+      <wps:Data>
+        <wps:ComplexData>
+          <parameters>
+            <quicklooks>
+              <config>
+                <RGBAExpressions>log(1.0 + 0.35 * radiance_2 + 0.60 * radiance_5 + radiance_6 + 0.13 * radiance_7),log(1.0 + 0.21 * radiance_3 + 0.50 * radiance_4 + radiance_5 + 0.38 * radiance_6),log(1.0 + 0.21 * radiance_1 + 1.75 * radiance_2 + 0.47 * radiance_3 + 0.16 * radiance_4)</RGBAExpressions>
+                <!--<RGBAMinSamples>0.0,0.0,0.0</RGBAMinSamples>
+                <RGBAMaxSamples>0.2,0.2,0.2</RGBAMaxSamples>-->
+                <imageType>png</imageType>
+                <!--<overlayURL>hdfs://master00:9000/calvalus/projects/lc/aux/countries_magenta_1800x900.png</overlayURL>-->
+              </config>
+            </quicklooks>
+          </parameters>
+        </wps:ComplexData>
+      </wps:Data>
+    </wps:Input>
+  </wps:DataInputs>
+</wps:Execute>

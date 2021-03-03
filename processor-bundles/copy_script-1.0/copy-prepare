@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -x
+
+inputUrl=$1
+outputDir=$2
+
+echo "Running prepare..."
+echo "inputUrl = ${inputUrl}"
+echo "outputDir = ${outputDir}"
+echo "Finished prepare."

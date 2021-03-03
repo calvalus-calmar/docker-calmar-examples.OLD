@@ -1,0 +1,24 @@
+#!/bin/bash
+set -x
+
+inputUrl=$1
+inputFile=$(basename $inputUrl)
+
+echo "inputUrl = ${inputUrl}"
+echo "inputFile = ${inputFile}"
+
+# researched: no values for these
+#echo "outputDir = ${outputDir}"
+#echo $parameters
+#echo $parametersText
+#echo $parameterText
+
+pwd=`pwd`
+echo "Current working directory: ${pwd}"
+
+#Perform copy
+echo "Performing copy: cp ${inputFile} processed-${inputFile}"
+cp $inputFile processed-$inputFile
+
+#report the paths of output files to Calvalus
+echo CALVALUS_OUTPUT_PRODUCT processed-$inputFile

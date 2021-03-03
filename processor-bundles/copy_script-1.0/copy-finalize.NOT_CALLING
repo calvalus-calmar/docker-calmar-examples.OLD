@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -x
+
+outputFile=$1
+outputDir=$2
+
+echo "Running finalize..."
+echo "outputFile = ${outputFile}"
+echo "outputDir = ${outputDir}"
+echo "Finished finalize."
